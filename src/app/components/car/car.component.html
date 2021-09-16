@@ -1,0 +1,11 @@
+<div class="row">
+  <div *ngFor="let car of carsWithDetails" class="col-md-4">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">{{ car.brandName }}</h5>
+        <p class="card-text">{{ car.carDescription }}</p>
+        <a href="#" class="btn btn-primary">{{ car.dailyPrice }}</a>
+      </div>
+    </div>
+  </div>
+</div>
