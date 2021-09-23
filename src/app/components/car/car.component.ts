@@ -9,8 +9,8 @@ import { CarDetail } from 'src/app/models/carDetail';
   styleUrls: ['./car.component.scss'],
 })
 export class CarComponent implements OnInit {
-  cars: Car[] = [];
-  carsWithDetails: CarDetail[] = [];
+  cars: Car[];
+  carsWithDetails: CarDetail[];
   constructor(private carService: CarService) {}
 
   ngOnInit(): void {

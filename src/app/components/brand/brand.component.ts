@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./brand.component.scss'],
 })
 export class BrandComponent implements OnInit {
-  brands: Brand[] = [];
+  brands: Brand[];
   dataLoaded: boolean = false;
 
   constructor(private brandService: BrandService) {}

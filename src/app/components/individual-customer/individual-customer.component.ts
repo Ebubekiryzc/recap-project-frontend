@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./individual-customer.component.scss'],
 })
 export class IndividualCustomerComponent implements OnInit {
-  individualCustomers: IndividualCustomer[] = [];
+  individualCustomers: IndividualCustomer[];
   dataLoaded: boolean = false;
 
   constructor(private individualCustomerService: IndividualCustomerService) {}

@@ -8,7 +8,7 @@ import { ColorService } from 'src/app/services/color.service';
   styleUrls: ['./color.component.scss'],
 })
 export class ColorComponent implements OnInit {
-  colors: Color[] = [];
+  colors: Color[];
   dataLoaded: boolean = false;
   constructor(private colorService: ColorService) {}
 
