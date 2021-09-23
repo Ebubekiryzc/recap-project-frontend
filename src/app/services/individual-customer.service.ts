@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
-import { IndividualCustomerResponseModel } from './../models/individualCustomerResponseModel';
 import { Injectable } from '@angular/core';
+import { IndividualCustomer } from '../models/individualCustomer';
+import { ListResponseModel } from '../models/listResponseModel';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -10,8 +11,8 @@ export class IndividualCustomerService {
   private apiURL: string = 'https://localhost:44305/api/individual-customers';
   constructor(private httpClient: HttpClient) {}
 
-  getAll(): Observable<IndividualCustomerResponseModel> {
-    return this.httpClient.get<IndividualCustomerResponseModel>(
+  getAll(): Observable<ListResponseModel<IndividualCustomer>> {
+    return this.httpClient.get<ListResponseModel<IndividualCustomer>>(
       `${this.apiURL}/getall`
     );
   }
