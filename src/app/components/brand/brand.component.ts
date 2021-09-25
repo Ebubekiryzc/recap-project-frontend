@@ -9,7 +9,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BrandComponent implements OnInit {
   brands: Brand[];
+  currentBrand?: Brand;
   dataLoaded: boolean = false;
+  allBrands: string = 'All Brands';
 
   constructor(private brandService: BrandService) {}
 
@@ -17,7 +19,23 @@ export class BrandComponent implements OnInit {
     this.getAll();
   }
 
-  getAll() {
+  setCurrentBrand(brand?: Brand): void {
+    this.currentBrand = brand;
+  }
+
+  getCurrentBrandClass(brand?: Brand): string {
+    return this.currentBrand === brand
+      ? 'list-group-item active text-center'
+      : 'list-group-item text-center';
+  }
+
+  getAllBrandClass(): string {
+    return !this.currentBrand
+      ? 'list-group-item list-group-item-action bg-secondary text-light text-center'
+      : 'list-group-item list-group-item-action text-center';
+  }
+
+  getAll(): void {
     this.brandService.getAll().subscribe((response) => {
       this.brands = response.data;
       this.dataLoaded = true;
