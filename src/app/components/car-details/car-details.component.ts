@@ -14,9 +14,10 @@ import { SanitizerService } from './../../services/sanitizer.service';
 })
 export class CarDetailsComponent implements OnInit {
   currentImage: CarImage;
-  carImages: CarImage[]=[];
+  carImages: CarImage[] = [];
   carInfo: CarDetail;
   imagesLoaded: boolean = false;
+  carLoaded: boolean = false;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -47,6 +48,7 @@ export class CarDetailsComponent implements OnInit {
   getCarDetails(carId: number): void {
     this.carService.getCarWithDetailsById(carId).subscribe((response) => {
       this.carInfo = response.data;
+      this.carLoaded = true;
     });
   }
 
