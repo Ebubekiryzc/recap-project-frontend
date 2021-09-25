@@ -1,10 +1,16 @@
 <div class="row">
   <div *ngFor="let car of carsWithDetails" class="col-md-4">
-    <div class="card">
+    <div class="card mb-4">
+      <img
+        [src]="getCarThumbnailURL(car.carId)"
+        class="card-img-top"
+        role="button"
+        routerLink="/cardetails/{{ car.carId }}"
+      />
       <div class="card-body">
         <h5 class="card-title">{{ car.brandName }}</h5>
-        <p class="card-text">{{ car.carDescription }}</p>
-        <a href="#" class="btn btn-primary">{{ car.dailyPrice }}</a>
+        <p class="card-text">{{ car.carName }}</p>
+        <a class="btn btn-success">{{ car.dailyPrice }}</a>
       </div>
     </div>
   </div>
