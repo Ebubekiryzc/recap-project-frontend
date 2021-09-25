@@ -12,6 +12,7 @@ export class ColorComponent implements OnInit {
   currentColor?: Color;
   dataLoaded: boolean = false;
   allColors: string = 'All Colors';
+  filterColorText: string = '';
 
   constructor(private colorService: ColorService) {}
 

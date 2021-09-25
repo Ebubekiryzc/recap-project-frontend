@@ -1,5 +1,18 @@
+<div class="bg-dark bg-gradient text-light p-3 mb-1 rounded d-flex">
+  <strong>{{ allBrands }}</strong>
+</div>
+<div class="mb-1">
+  <input
+    type="text"
+    [(ngModel)]="filterBrandText"
+    class="form-control"
+    id="filterBrandText"
+    placeholder="Enter your brand name"
+  />
+</div>
 <ul class="list-group">
   <li
+    *ngIf="!filterBrandText"
     [class]="getAllBrandClass()"
     (click)="setCurrentBrand()"
     routerLink="/cars"
@@ -7,7 +20,7 @@
     {{ allBrands }}
   </li>
   <li
-    *ngFor="let brand of brands"
+    *ngFor="let brand of brands | filterBrand: filterBrandText"
     [class]="getCurrentBrandClass(brand)"
     (click)="setCurrentBrand(brand)"
     routerLink="/cars/brand/{{ brand.id }}"

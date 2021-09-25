@@ -1,5 +1,62 @@
+<div class="row mx-1">
+  <div class="bg-dark rounded py-2 text-light d-flex align-items-center">
+    <div class="col-md-6 d-flex justify-content-start">
+      <div>
+        <select
+          class="form-select bg-dark text-light"
+          aria-label="Default select example"
+          [(ngModel)]="filterBrandId"
+        >
+          <option selected value="-1">Brands</option>
+          <option *ngFor="let brand of brands" [value]="brand.id">
+            {{ brand.name }}
+          </option>
+        </select>
+      </div>
+      <div class="ms-2">
+        <select
+          class="form-select bg-dark text-light"
+          aria-label="Default select example"
+          [(ngModel)]="filterColorId"
+        >
+          <option selected value="-1">Colors</option>
+          <option *ngFor="let color of colors" [value]="color.id">
+            {{ color.name }}
+          </option>
+        </select>
+      </div>
+      <div class="ms-2">
+        <button
+          (click)="getAllCarsWithDetailsByFilter(filterBrandId, filterColorId)"
+          class="btn btn-primary"
+        >
+          Search
+        </button>
+      </div>
+      <div class="ms-2">
+        <button (click)="removeFilters()" class="btn btn-danger">
+          Remove filters
+        </button>
+      </div>
+    </div>
+    <div class="col-md-6 d-flex justify-content-end align-items-center">
+      <label for="filterCarText">Model Name: </label>
+      <div class="col-md-5 ms-2">
+      <input
+        type="text"
+        [(ngModel)]="filterCarModelName"
+        class="form-control"
+        id="filterCarText"
+        placeholder="Enter your car name"
+      /></div>
+    </div>
+  </div>
+</div>
 <div class="row">
-  <div *ngFor="let car of carsWithDetails" class="col-md-4">
+  <div
+    *ngFor="let car of carsWithDetails | filterCarName: filterCarModelName"
+    class="col-md-4"
+  >
     <div class="card mb-4">
       <img
         [src]="getCarThumbnailURL(car.carId)"

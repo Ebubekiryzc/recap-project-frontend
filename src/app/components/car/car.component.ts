@@ -1,9 +1,13 @@
 import { ActivatedRoute } from '@angular/router';
+import { Brand } from 'src/app/models/brand';
+import { BrandService } from './../../services/brand.service';
 import { Car } from './../../models/car';
 import { CarDetail } from 'src/app/models/carDetail';
 import { CarImage } from 'src/app/models/carImage';
 import { CarImageService } from 'src/app/services/car-image.service';
 import { CarService } from './../../services/car.service';
+import { Color } from 'src/app/models/color';
+import { ColorService } from './../../services/color.service';
 import { Component, OnInit } from '@angular/core';
 import { SafeUrl } from '@angular/platform-browser';
 import { SanitizerService } from './../../services/sanitizer.service';
@@ -16,15 +20,24 @@ import { SanitizerService } from './../../services/sanitizer.service';
 export class CarComponent implements OnInit {
   carThumbnails: CarImage[] = [];
   cars: Car[];
+  brands: Brand[] = [];
+  colors: Color[] = [];
+
   carsWithDetails: CarDetail[];
   carWithDetails: CarDetail;
 
   carsLoaded: boolean = false;
 
+  filterBrandId: number = -1;
+  filterColorId: number = -1;
+  filterCarModelName: string = '';
+
   constructor(
     private activatedRoute: ActivatedRoute,
+    private brandService: BrandService,
     private carService: CarService,
     private carImageService: CarImageService,
+    private colorService: ColorService,
     private sanitizer: SanitizerService
   ) {}
 
@@ -40,6 +53,8 @@ export class CarComponent implements OnInit {
         : params['colorId']
         ? this.getAllCarsWithDetailsByColorId(params['colorId'])
         : this.getAllCarsWithDetails();
+      this.getBrands();
+      this.getColors();
     });
   }
 
@@ -82,12 +97,38 @@ export class CarComponent implements OnInit {
   }
 
   getAllCarsWithDetailsByFilter(brandId: number, colorId: number): void {
-    this.carService
-      .getAllCarsWithDetailsByBrandIdAndColorId(brandId, colorId)
-      .subscribe((response) => {
-        this.carsWithDetails = response.data;
-        this.isCarsLoaded();
-      });
+    if (brandId == -1 && colorId == -1) {
+      this.getAllCarsWithDetails();
+    } else if (brandId != -1) {
+      this.getAllCarsWithDetailsByBrandId(brandId);
+    } else if (colorId != -1) {
+      this.getAllCarsWithDetailsByColorId(colorId);
+    } else {
+      this.carService
+        .getAllCarsWithDetailsByBrandIdAndColorId(brandId, colorId)
+        .subscribe((response) => {
+          this.carsWithDetails = response.data;
+          this.isCarsLoaded();
+        });
+    }
+  }
+
+  removeFilters(): void {
+    this.getAllCarsWithDetails();
+    this.filterBrandId = -1;
+    this.filterColorId = -1;
+  }
+
+  getBrands() {
+    this.brandService.getAll().subscribe((response) => {
+      this.brands = response.data;
+    });
+  }
+
+  getColors() {
+    this.colorService.getAll().subscribe((response) => {
+      this.colors = response.data;
+    });
   }
 
   getCarThumbnailByCarId(carId: number): void {

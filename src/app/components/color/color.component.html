@@ -1,5 +1,18 @@
+<div class="bg-dark bg-gradient text-center text-light p-3 mb-1 rounded">
+  <strong>{{ allColors }}</strong>
+</div>
+<div class="mb-1">
+  <input
+    type="text"
+    [(ngModel)]="filterColorText"
+    class="form-control"
+    id="filterColorText"
+    placeholder="Enter your color name"
+  />
+</div>
 <ul class="list-group">
   <li
+    *ngIf="!filterColorText"
     [class]="getAllColorClass()"
     (click)="setCurrentColor()"
     routerLink="/cars"
@@ -7,7 +20,7 @@
     {{ allColors }}
   </li>
   <li
-    *ngFor="let color of colors"
+    *ngFor="let color of colors | filterColor: filterColorText"
     [class]="getCurrentColorClass(color)"
     (click)="setCurrentColor(color)"
     routerLink="/cars/color/{{ color.id }}"
