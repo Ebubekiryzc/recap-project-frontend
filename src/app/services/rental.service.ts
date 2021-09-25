@@ -1,3 +1,4 @@
+import { SingleResponseModel } from './../models/singleResponseModel';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ListResponseModel } from '../models/listResponseModel';
@@ -17,5 +18,13 @@ export class RentalService {
     return this.httpClient.get<
       ListResponseModel<RentalDetailWithIndividualCustomers>
     >(`${this.apiURL}/getallwithindividualcustomerdetails`);
+  }
+
+  getRentalWithIndividualCustomerDetailsById(
+    id: number
+  ): Observable<SingleResponseModel<RentalDetailWithIndividualCustomers>> {
+    return this.httpClient.get<
+      SingleResponseModel<RentalDetailWithIndividualCustomers>
+    >(`${this.apiURL}/getwithindividualcustomerdetailsbyrentalid?id=${id}`);
   }
 }
