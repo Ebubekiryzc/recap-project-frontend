@@ -1,0 +1,56 @@
+<div class="row">
+  <div class="col-md-8">
+    <div id="carousel" class="carousel carousel-dark slide">
+      <div class="carousel-inner">
+        <div
+          *ngFor="let carImage of carImages"
+          [class]="getCurrentImageClass(carImage)"
+        >
+          <img [src]="getCarImageURL(carImage)" alt="..." />
+        </div>
+        <div *ngIf="carImages.length > 1" class="carousel-controls">
+          <a
+            class="carousel-control-prev"
+            role="button"
+            (click)="getPreviousImage()"
+          >
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          </a>
+          <a
+            class="carousel-control-next"
+            role="button"
+            (click)="getNextImage()"
+          >
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <table class="table table-dark">
+      <tbody>
+        <tr>
+          <th>Car Id</th>
+          <td>{{ carInfo.carId }}</td>
+        </tr>
+        <tr>
+          <th>Brand Name</th>
+          <td>{{ carInfo.brandName }}</td>
+        </tr>
+        <tr>
+          <th>Model Name</th>
+          <td>{{carInfo.carName}}</td>
+        </tr>
+        <tr>
+          <th>Color</th>
+          <td>{{ carInfo.colorName }}</td>
+        </tr>
+        <tr>
+          <th>Daily Price</th>
+          <td>{{carInfo.dailyPrice}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
