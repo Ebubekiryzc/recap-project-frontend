@@ -1,4 +1,4 @@
-import { SafeUrl } from '@angular/platform-browser';
+import { DateTimeService } from './../../services/date-time.service';
 import { ActivatedRoute } from '@angular/router';
 import { CarImage } from 'src/app/models/carImage';
 import { CarDetail } from 'src/app/models/carDetail';
@@ -6,6 +6,7 @@ import { CarImageService } from 'src/app/services/car-image.service';
 import { CarService } from './../../services/car.service';
 import { Component, OnInit } from '@angular/core';
 import { SanitizerService } from './../../services/sanitizer.service';
+import { SafeUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-car-details',
@@ -23,7 +24,8 @@ export class CarDetailsComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private carService: CarService,
     private imageService: CarImageService,
-    private sanitizer: SanitizerService
+    private sanitizer: SanitizerService,
+    private dateTimeService: DateTimeService
   ) {}
 
   ngOnInit(): void {
@@ -33,6 +35,7 @@ export class CarDetailsComponent implements OnInit {
         this.getCarImages(params['carId']);
       }
     });
+    
   }
 
   getCarImages(carId: number): void {
@@ -75,4 +78,10 @@ export class CarDetailsComponent implements OnInit {
       ? (this.currentImage = this.carImages[0])
       : (this.currentImage = this.carImages[indexOfCurrent + 1]);
   }
+
+  getDatetimeNow(): string {
+    return this.dateTimeService.getTodayWithTime();
+  }
+
+  addToCart(): void {}
 }
