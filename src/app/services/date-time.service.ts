@@ -20,6 +20,11 @@ export class DateTimeService {
     return `${this.getToday()}T${this.getCurrentTime()}`;
   }
 
+  getCurrentYear() : string {
+    let date = new Date()
+    return `${date.getFullYear()}`
+  }
+
   formatDate(date: Date): string {
     return date.toLocaleDateString().split('.').reverse().join('-');
   }
