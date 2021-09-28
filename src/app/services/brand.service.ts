@@ -1,3 +1,4 @@
+import { ResponseModel } from './../models/responseModel';
 import { Brand } from '../models/brand';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -22,5 +23,17 @@ export class BrandService {
     return this.httpClient.get<SingleResponseModel<Brand>>(
       `${this.apiURL}/getbyid?id=${id}`
     );
+  }
+
+  add(brand: Brand): Observable<ResponseModel> {
+    return this.httpClient.post<ResponseModel>(`${this.apiURL}/add`, brand);
+  }
+
+  update(brand: Brand): Observable<ResponseModel> {
+    return this.httpClient.post<ResponseModel>(`${this.apiURL}/update`, brand);
+  }
+
+  delete(brand: Brand): Observable<ResponseModel> {
+    return this.httpClient.post<ResponseModel>(`${this.apiURL}/delete`, brand);
   }
 }
