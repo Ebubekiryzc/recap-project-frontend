@@ -1,0 +1,42 @@
+<table class="table table-striped">
+    <thead class="table-dark">
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Brand Name</th>
+        <th scope="col">Description</th>
+        <th scope="col">Color Name</th>
+        <th scope="col">Model Year</th>
+        <th scope="col">Daily Price</th>
+        <th scope="col">
+          <button class="btn btn-success" routerLink="add">Add Brand</button>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let car of carsDetails">
+        <th scope="row">{{ car.carId }}</th>
+        <td>{{ car.brandName }}</td>
+        <td>{{ car.carName }}</td>
+        <td>{{ car.colorName }}</td>
+        <td>{{ car.modelYear }}</td>
+        <td>{{ car.dailyPrice }}</td>
+        <td>
+          <button
+            class="btn btn-warning"
+            type="button"
+            routerLink="update/{{car.carId}}"
+          >
+            Update
+          </button>
+          <button
+            class="btn btn-danger mx-2"
+            type="button"
+            routerLink="delete/{{ car.carId }}"
+          >
+            Delete
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  
