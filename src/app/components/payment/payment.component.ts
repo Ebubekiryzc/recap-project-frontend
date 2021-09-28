@@ -19,6 +19,8 @@ export class PaymentComponent implements OnInit {
   ngOnInit(): void {}
 
   getPayment(paymentQuery?: PaymentQuery) {
-    this.toastrService.success('Payment Successful.');
+    this.paymentService.getPayment(paymentQuery).subscribe((response) => {
+      this.toastrService.success('Payment Successful.');
+    });
   }
 }
