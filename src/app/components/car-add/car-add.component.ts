@@ -84,7 +84,7 @@ export class CarAddComponent implements OnInit {
           if (responseError.error.Errors.length > 0) {
             for (let i = 0; i < responseError.error.Errors.length; i++) {
               this.toastrService.error(
-                responseError.error.Errors.ErrorMessage[i],
+                responseError.error.Errors[i].ErrorMessage,
                 'Validation Error!'
               );
             }

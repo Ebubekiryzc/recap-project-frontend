@@ -1,1 +1,102 @@
-/* You can add global styles to this file, and also import other style files */
+@import "./app/sass/colors";
+@import "./app/sass/measures";
+
+html::-webkit-scrollbar {
+  width: $half-size;
+}
+html::-webkit-scrollbar-track {
+  background: transparent;
+}
+html::-webkit-scrollbar-thumb {
+  background: $main-color;
+  border-radius: 5rem;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-padding-top: 2rem;
+  scroll-behavior: smooth;
+  list-style: none;
+  text-decoration: none;
+  font-family: "Poppins", sans-serif;
+
+  section {
+    padding: $half-px $full-px;
+  }
+
+  .heading {
+    text-align: center;
+    span {
+      font-weight: 500;
+      text-transform: uppercase;
+    }
+    h1 {
+      font-size: $big-size + 0.2rem;
+      font-weight: 700;
+    }
+  }
+
+  @keyframes run {
+    0% {
+      transform: translate($half-px, $half-px * -1);
+    }
+    100% {
+      transform: translate(0, 0);
+    }
+  }
+
+  @keyframes bounce {
+    0% {
+      bottom: 0%;
+    }
+
+    50% {
+      bottom: 3%;
+    }
+
+    100% {
+      bottom: 0%;
+    }
+  }
+
+  @keyframes scroll-down {
+    0% {
+      opacity: 0;
+    }
+    30% {
+      opacity: 1;
+    }
+    60% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+      top: 90%;
+    }
+  }
+}
+
+@media (max-width: 839px) {
+  .heading {
+    span {
+      font-size: $full-size * 0.9;
+      font-weight: 600;
+    }
+    h1 {
+      font-size: $full-size * 1.3;
+    }
+  }
+}
+
+@media (max-width: 350px) {
+  * {
+    section {
+      padding: 50px 14px;
+    }
+    .text h1 {
+      font-size: 2rem;
+    }
+  }
+}

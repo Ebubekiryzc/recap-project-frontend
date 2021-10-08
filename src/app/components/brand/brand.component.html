@@ -1,30 +1,42 @@
-<div class="bg-dark bg-gradient text-light p-3 mb-1 rounded d-flex">
-  <strong>{{ allBrands }}</strong>
+<div class="brands">
+  <div class="row">
+    <div class="group">
+      <strong>{{ allBrands }}</strong>
+    </div>
+  </div>
+  <div class="row">
+    <div class="mb-1">
+      <input
+        type="text"
+        [(ngModel)]="filterBrandText"
+        class="form-control"
+        id="filterBrandText"
+        placeholder="Enter your brand name"
+      />
+    </div>
+  </div>
+  <ul>
+    <div class="row">
+      <li
+        *ngIf="!filterBrandText"
+        [class]="getAllBrandClass()"
+        (click)="setCurrentBrand(undefined)"
+        routerLink="/cars"
+      >
+        <p>
+          {{ allBrands }}
+        </p>
+      </li>
+      <li
+        *ngFor="let brand of brands | filterBrand: filterBrandText"
+        [class]="getCurrentBrandClass(brand)"
+        (click)="setCurrentBrand(brand)"
+        routerLink="/cars/brand/{{ brand.id }}"
+      >
+        <p>
+          {{ brand.name }}
+        </p>
+      </li>
+    </div>
+  </ul>
 </div>
-<div class="mb-1">
-  <input
-    type="text"
-    [(ngModel)]="filterBrandText"
-    class="form-control"
-    id="filterBrandText"
-    placeholder="Enter your brand name"
-  />
-</div>
-<ul class="list-group">
-  <li
-    *ngIf="!filterBrandText"
-    [class]="getAllBrandClass()"
-    (click)="setCurrentBrand()"
-    routerLink="/cars"
-  >
-    {{ allBrands }}
-  </li>
-  <li
-    *ngFor="let brand of brands | filterBrand: filterBrandText"
-    [class]="getCurrentBrandClass(brand)"
-    (click)="setCurrentBrand(brand)"
-    routerLink="/cars/brand/{{ brand.id }}"
-  >
-    {{ brand.name }}
-  </li>
-</ul>

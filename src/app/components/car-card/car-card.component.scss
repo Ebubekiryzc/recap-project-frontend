@@ -1,0 +1,53 @@
+@import "../../sass/base";
+@import "../../sass/colors";
+@import "../../sass/measures";
+@import "../../sass/mixins";
+
+.box {
+  padding: 10px;
+  border-radius: $full-size;
+  box-shadow: $box-shadow-1;
+  .box-img {
+    width: $full-percent;
+    height: $full-px * 3;
+    cursor: pointer;
+
+    img {
+      width: $full-percent;
+      height: $full-percent;
+      border-radius: $full-size;
+      object-fit: cover;
+      object-position: center;
+    }
+  }
+  p {
+    padding: 0 10px;
+    display: inline-block;
+    border: 1px solid $text-color;
+    border-radius: $half-size;
+    margin: $full-size $half-size*0.5 $full-size;
+  }
+
+  h3 {
+    font-weight: 500;
+  }
+
+  h2 {
+    font-size: $full-size * 1.5;
+    font-weight: 600;
+    color: $main-color;
+    margin: $full-size * 0.2 0 $half-size;
+    span {
+      font-size: $full-size;
+      font-weight: 500;
+      color: $text-color;
+    }
+  }
+
+  .btn {
+    display: flex;
+    justify-content: center;
+    @include button-colors($button-bg-primary, $bg-light-2, $main-color);
+    @extend %btn;
+  }
+}

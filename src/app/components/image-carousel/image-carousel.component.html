@@ -1,0 +1,27 @@
+<swiper
+  *ngIf="imageURL.length > 1"
+  [breakpoints]="{
+    '640': {
+      slidesPerView: 1
+    },
+    '768': {
+      slidesPerView: 2
+    },
+    '1024': {
+      slidesPerView: 3
+    }
+  }"
+  [centeredSlides]="true"
+  [spaceBetween]="30"
+  [grabCursor]="false"
+  [pagination]="{ clickable: true }"
+  [navigation]="true"
+  [allowTouchMove]="false"
+  (activeIndexChange)="onSelectionChange(swiper)"
+  class="image-slider"
+  #swiper
+>
+  <ng-template *ngFor="let url of imageURL" swiperSlide class="box">
+    <img [src]="url" class="slide-image"
+  /></ng-template>
+</swiper>

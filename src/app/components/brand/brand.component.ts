@@ -1,6 +1,7 @@
 import { Brand } from 'src/app/models/brand';
 import { BrandService } from './../../services/brand.service';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-brand',
@@ -9,31 +10,57 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BrandComponent implements OnInit {
   brands: Brand[];
-  currentBrand?: Brand;
+  currentBrand: Brand;
   dataLoaded: boolean = false;
+  dataWithRoute: boolean = false;
   allBrands: string = 'All Brands';
   filterBrandText: string = '';
 
-  constructor(private brandService: BrandService) {}
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private brandService: BrandService,
+  ) {}
 
   ngOnInit(): void {
-    this.getAll();
+    this.activatedRoute.params.subscribe((params) => {
+      if (params['brandId']) {
+        this.setCurrentBrandById(params['brandId']);
+        this.getAll();
+      } else {
+        this.getAll();
+      }
+    });
+  }
+
+  setCurrentBrandById(brandId: number) {
+    this.brandService.getById(brandId).subscribe((response) => {
+      this.setCurrentBrand(response.data);
+      this.dataWithRoute = true;
+    });
   }
 
   setCurrentBrand(brand?: Brand): void {
     this.currentBrand = brand;
   }
-
-  getCurrentBrandClass(brand?: Brand): string {
-    return this.currentBrand === brand
-      ? 'list-group-item active text-center'
-      : 'list-group-item text-center';
+  
+  getCurrentBrandClass(brand: Brand) {
+    if (this.currentBrand) {
+      if (brand.id == this.currentBrand.id) {
+        return 'active text-center';
+      } else {
+        return 'text-center';
+      }
+    } else {
+      return 'text-center';
+    }
   }
 
-  getAllBrandClass(): string {
-    return !this.currentBrand
-      ? 'list-group-item list-group-item-action bg-secondary text-light text-center'
-      : 'list-group-item list-group-item-action text-center';
+  getAllBrandClass() {
+    if (!this.currentBrand) {
+      return 'active text-center';
+    } else {
+      return 'text-center';
+    }
   }
 
   getAll(): void {

@@ -1,0 +1,121 @@
+@import "../../../sass/base";
+@import "../../../sass/colors";
+@import "../../../sass/measures";
+@import "../../../sass/mixins";
+
+.header {
+  width: $full-percent;
+  min-height: 100vh;
+  position: relative;
+  background: url("../../../../assets/images/carsBackground.png");
+  background-repeat: no-repeat;
+  background-position: center right;
+  background-size: cover;
+  border-radius: 0 0 200px 0;
+  display: grid;
+  align-items: center;
+  grid-template-columns: repeat (2, 1fr);
+
+  .car-image {
+    img {
+      width: $half-percent;
+      position: absolute;
+      right: $full-px;
+      bottom: $full-px * 2;
+      animation: run 2s;
+    }
+  }
+
+  .text {
+    margin-bottom: $full-percent * 0.1;
+    h1 {
+      font-size: $big-font;
+      font-weight: 700;
+      letter-spacing: 2px;
+    }
+
+    span {
+      color: $main-color;
+      font-weight: 700;
+    }
+  }
+
+  .scroll-down {
+    height: $half-px;
+    width: $full-px * 0.3;
+    border: 2px solid $button-bg-primary;
+    position: absolute;
+    left: $half-percent;
+    bottom: $half-px * 0.4;
+    border-radius: 50px;
+    cursor: pointer;
+
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      top: $half-percent * 0.4;
+      left: $half-percent;
+      border: 2px solid $button-bg-primary;
+      height: 10px;
+      width: 10px;
+      transform: translate(-1 * $half-percent, -1 * $half-percent) rotate(45deg);
+      border-top: transparent;
+      border-left: transparent;
+      animation: scroll-down 1s ease-in-out infinite;
+    }
+
+    &::after {
+      top: $half-percent * 0.6;
+    }
+  }
+}
+
+@media (max-width: 1362px) {
+  .header {
+    .scroll-down {
+      border: 2px solid $bg-light;
+
+      &::before,
+      &::after {
+        border: 2px solid $bg-light;
+        border-top: transparent;
+        border-left: transparent;
+      }
+    }
+  }
+}
+
+@media (max-width: 881px) {
+  .header {
+    background-position: left;
+
+    .car-image {
+      display: none;
+    }
+
+    .scroll-down {
+      border: 2px solid $button-bg-primary;
+
+      &::before,
+      &::after {
+        border: 2px solid $button-bg-primary;
+        border-top: transparent;
+        border-left: transparent;
+      }
+    }
+  }
+}
+
+@media (max-width: 839px) {
+  * {
+    .text {
+      h1 {
+        font-size: $big-size * 1.25;
+      }
+    }
+    .header {
+      grid-template-columns: 1fr;
+    }
+  }
+}

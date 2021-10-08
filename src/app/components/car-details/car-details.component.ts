@@ -1,12 +1,13 @@
-import { DateTimeService } from './../../services/date-time.service';
+import { DateTimeService } from '../../services/date-time.service';
 import { ActivatedRoute } from '@angular/router';
 import { CarImage } from 'src/app/models/carImage';
 import { CarDetail } from 'src/app/models/carDetail';
 import { CarImageService } from 'src/app/services/car-image.service';
-import { CarService } from './../../services/car.service';
-import { Component, OnInit } from '@angular/core';
-import { SanitizerService } from './../../services/sanitizer.service';
+import { CarService } from '../../services/car.service';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { SanitizerService } from '../../services/sanitizer.service';
 import { SafeUrl } from '@angular/platform-browser';
+import { faCircle } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-car-details',
@@ -14,8 +15,11 @@ import { SafeUrl } from '@angular/platform-browser';
   styleUrls: ['./car-details.component.scss'],
 })
 export class CarDetailsComponent implements OnInit {
+  faCircle = faCircle;
+
   currentImage: CarImage;
   carImages: CarImage[] = [];
+  safeURLs: SafeUrl[] = [];
   carInfo: CarDetail;
   imagesLoaded: boolean = false;
   carLoaded: boolean = false;
@@ -35,17 +39,14 @@ export class CarDetailsComponent implements OnInit {
         this.getCarImages(params['carId']);
       }
     });
-    
   }
 
-  getCarImages(carId: number): void {
-    this.imageService.getByCarId(carId).subscribe((response) => {
-      this.carImages = response.data;
-      this.imagesLoaded = true;
-      if (this.imagesLoaded) {
-        this.currentImage = this.carImages[0];
-      }
-    });
+  setDetailImageClass(): string {
+    if (this.carImages.length == 1) {
+      return 'detail-image not-hidden';
+    } else {
+      return 'detail-image';
+    }
   }
 
   getCarDetails(carId: number): void {
@@ -53,6 +54,21 @@ export class CarDetailsComponent implements OnInit {
       this.carInfo = response.data;
       this.carLoaded = true;
     });
+  }
+
+  getCarImages(carId: number): void {
+    this.imageService.getByCarId(carId).subscribe((response) => {
+      this.carImages = response.data;
+      this.translateToTrusted();
+      this.imagesLoaded = true;
+      if (this.imagesLoaded) {
+        this.currentImage = this.carImages[0];
+      }
+    });
+  }
+
+  getCurrentCarImageURL(): SafeUrl {
+    return this.sanitizer.sanitizeURL(this.currentImage.imagePath);
   }
 
   getCarImageURL(carImage: CarImage): SafeUrl {
@@ -65,18 +81,20 @@ export class CarDetailsComponent implements OnInit {
       : 'carousel-item';
   }
 
-  getPreviousImage(): void {
-    let indexOfCurrent = this.carImages.indexOf(this.currentImage);
-    indexOfCurrent === 0
-      ? (this.currentImage = this.carImages[this.carImages.length - 1])
-      : (this.currentImage = this.carImages[indexOfCurrent - 1]);
+  translateToTrusted() {
+    for (let index = 0; index < this.carImages.length; index++) {
+      this.safeURLs.push(this.getCarImageURL(this.carImages[index]));
+    }
   }
 
-  getNextImage(): void {
-    let indexOfCurrent = this.carImages.indexOf(this.currentImage);
-    indexOfCurrent === this.carImages.length - 1
-      ? (this.currentImage = this.carImages[0])
-      : (this.currentImage = this.carImages[indexOfCurrent + 1]);
+  getSelectedImage(path: string) {
+    if (path.startsWith('Safe')) {
+      path = path.split('binding: ')[1];
+      path = path.split('(see')[0];
+    }
+    if (this.currentImage) {
+      this.currentImage.imagePath = path;
+    }
   }
 
   getDatetimeNow(): string {

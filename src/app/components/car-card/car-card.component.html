@@ -1,0 +1,12 @@
+<div class="box">
+  <div class="box-img">
+    <img src="{{ carImageURL }}" alt="{{ carDetail.brandName }}" (click)="goToCarDetails()"/>
+  </div>
+  <p>{{ carDetail.modelYear }}</p>
+  <p>{{ carDetail.colorName }}</p>
+  <h3>{{ carDetail.brandName }} {{ carDetail.carName }}</h3>
+  <h2>
+    {{ carDetail.dailyPrice | currency: "TRY":"₺":"1.0" }} <span>/daily</span>
+  </h2>
+  <a routerLink="" class="btn">Rent Now</a>
+</div>

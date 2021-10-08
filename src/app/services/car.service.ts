@@ -74,4 +74,10 @@ export class CarService {
       `${this.apiURL}/getcarswithdetailbybrandidandcolorid?brandId=${brandId}&colorId=${colorId}`
     );
   }
+
+  getTopSaleCarDetails(): Observable<ListResponseModel<CarDetail>> {
+    return this.httpClient.get<ListResponseModel<CarDetail>>(
+      `${this.apiURL}/gettopsixdeals`
+    );
+  }
 }

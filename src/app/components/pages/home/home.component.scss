@@ -1,0 +1,324 @@
+@import "../../../sass/base";
+@import "../../../sass/colors";
+@import "../../../sass/measures";
+@import "../../../sass/mixins";
+
+.home {
+  width: $full-percent;
+  min-height: 100vh;
+  position: relative;
+  background: url("../../../../assets/images/homeBackground.png");
+  background-repeat: no-repeat;
+  background-position: center right;
+  background-size: cover;
+  display: grid;
+  align-items: center;
+  grid-template-columns: repeat (2, 1fr);
+
+  .car-image {
+    img {
+      width: $half-percent;
+      position: absolute;
+      right: $full-px;
+      bottom: $full-px * 2;
+      animation: run 2s;
+    }
+  }
+
+  .text {
+    margin-top: 15%;
+    h1 {
+      font-size: $big-font;
+      font-weight: 700;
+      letter-spacing: 2px;
+    }
+
+    span {
+      color: $main-color;
+      font-weight: 700;
+    }
+
+    p {
+      margin: 0.5rem 0 $full-size;
+    }
+
+    .app-stores {
+      display: flex;
+      img {
+        width: $full-px;
+        margin-right: $full-size;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .form-container {
+    form {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: $full-size;
+      position: absolute;
+      bottom: $huge-size;
+      left: $full-px;
+      background: $bg-light-2;
+      border-radius: $half-size;
+      padding: 20px;
+
+      .input-box {
+        flex: 1 1 7rem;
+        display: flex;
+        flex-direction: column;
+
+        span {
+          font-weight: 500;
+        }
+
+        input {
+          padding: 7px;
+          outline: none;
+          border: none;
+          background: $bg-light;
+          border-radius: $half-size;
+          font-size: $full-size;
+        }
+      }
+      .btn {
+        @include button-colors($button-bg-primary, $bg-light-2, $main-color);
+        flex: 1 1 7rem;
+        padding: 10px 34px;
+        border: none;
+        border-radius: $half-size;
+        font-size: $full-size;
+        font-weight: 500;
+      }
+    }
+  }
+}
+
+.ride {
+  .ride-container {
+    display: grid;
+    align-items: center;
+    grid-template-columns: repeat(auto-fit, minmax(250px, auto));
+    gap: 1rem;
+    margin-top: 2rem;
+
+    .box {
+      text-align: center;
+      padding: 20px;
+
+      fa-icon {
+        font-size: 30px;
+        padding: 10px 17px;
+        border-radius: $half-size;
+        @include button-colors($bg-light, $main-color, $gradient, $bg-light);
+        &.calendar-check {
+          background: $gradient;
+          color: $bg-light;
+        }
+      }
+
+      h2 {
+        font-size: 1.3rem;
+        font-weight: 600;
+        margin: 1.4rem 0 0.5rem;
+      }
+    }
+  }
+}
+
+.services {
+  .services-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, auto));
+    gap: $full-size;
+    margin-top: $big-size;
+  }
+}
+
+.about {
+  .about-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    margin-top: $big-size;
+    align-items: center;
+    gap: $full-size;
+    margin-top: $full-size;
+    .about-img {
+      img {
+        width: $full-percent;
+      }
+    }
+    .about-text {
+      span {
+        font-weight: 500;
+        color: $main-color;
+        text-transform: uppercase;
+      }
+      p {
+        margin: $half-size 0 $full-size * 1.4;
+      }
+      .btn {
+        @include button-colors($button-bg-primary, $bg-light-2, $main-color);
+        @extend %btn;
+      }
+    }
+  }
+}
+
+.reviews {
+  .reviews-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, auto));
+    gap: $full-size;
+    margin-top: $big-size;
+
+    .rev-img {
+      width: 70px;
+      height: 70px;
+      img {
+        width: $full-percent;
+        height: $full-percent;
+        border-radius: $half-percent;
+        object-fit: cover;
+        object-position: center;
+        border: 2px solid $second-color;
+      }
+    }
+
+    .box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 20px;
+      box-shadow: $box-shadow-1;
+      border-radius: $half-size;
+
+      h2 {
+        font-size: $full-size * 1.1;
+        font-weight: 600;
+        margin: $half-size 0 $half-size;
+      }
+
+      p {
+        font-style: italic;
+        margin: 0 $half-px;
+      }
+
+      .stars fa-icon {
+        color: $main-color;
+      }
+
+      &:hover {
+        background: $gradient;
+        h2 {
+          color: $bg-light;
+        }
+
+        .stars fa-icon {
+          color: $text-color;
+        }
+      }
+    }
+  }
+}
+
+.register-now {
+  background: linear-gradient(to top right, $main-color, $second-color);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  h2 {
+    color: $bg-light;
+    font-size: $big-size * 0.9;
+    font-weight: 600;
+  }
+
+  .box {
+    margin-top: $full-size;
+    background: $bg-light;
+    border-radius: $half-size;
+    padding: 4px 8px;
+    width: 350px;
+    display: flex;
+    justify-content: space-between;
+
+    .btn {
+      @include button-colors($button-bg-primary, $bg-light-2, $main-color);
+      @extend %btn;
+      width: $full-percent;
+    }
+  }
+}
+
+// Responsiveness
+@media (max-width: 991px) {
+  section {
+    padding: 50px 40px;
+  }
+}
+
+@media (max-width: 881px) {
+  .home {
+    background-position: left;
+
+    .car-image {
+      display: none;
+    }
+  }
+  .form-container form {
+    bottom: $full-size * 0.2;
+    left: 40px;
+  }
+}
+
+@media (max-width: 839px) {
+  * {
+    .text {
+      h1 {
+        font-size: $big-size * 1.25;
+      }
+    }
+    .home {
+      grid-template-columns: 1fr;
+
+      .form-container form {
+        position: unset;
+      }
+    }
+
+    .about-container {
+      grid-template-columns: 1fr;
+      text-align: center;
+
+      .about-img {
+        padding: $full-size;
+        order: 2;
+      }
+    }
+  }
+}
+
+@media (max-width: 568px) {
+  * {
+    .register-now {
+      .box {
+        width: 284px;
+      }
+    }
+
+    .form-container {
+      padding-top: $big-size;
+    }
+  }
+}
+
+@media (max-width: 350px) {
+  * {
+    .services-container {
+      grid-template-columns: repeat(auto-fit, minmax(254px, auto));
+    }
+  }
+}

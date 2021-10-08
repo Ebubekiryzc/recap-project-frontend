@@ -14,11 +14,11 @@ export class CartService {
   addToCart(car: CarDetail) {
     let item = CartItems.find((c) => c.car.carId === car.carId);
     if (item) {
-      item.quantity += 1;
+      item.dayCount += 1;
     } else {
       let cartItem = new CartItem();
       cartItem.car = car;
-      cartItem.quantity = 1;
+      cartItem.dayCount = 1;
       CartItems.push(cartItem);
     }
   }
@@ -27,8 +27,8 @@ export class CartService {
     let item: CartItem = CartItems.find(
       (c) => c.car.carId === car.carId
     );
-    if (item.quantity > 1) {
-      item.quantity -= 1;
+    if (item.dayCount > 1) {
+      item.dayCount -= 1;
     } else {
       CartItems.splice(CartItems.indexOf(item), 1);
     }

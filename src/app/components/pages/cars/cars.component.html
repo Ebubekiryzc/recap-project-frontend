@@ -1,0 +1,42 @@
+<section class="header" id="header">
+  <div class="car-image">
+    <img
+      src="../../../../assets/images/carPageBackGround.png"
+      alt="carPageBG"
+    />
+  </div>
+  <div
+    [ngsRevealSet]="{ reset: true, delay: 200, origin: 'top' }"
+    [ngsSelector]="'.text'"
+    class="text"
+  >
+    <h1><span>Looking </span>to <br />rent a car</h1>
+    <p>
+      Find the most suitable one for you among <br />
+      hundreds of offers with various campaigns for long-term rentals.
+    </p>
+  </div>
+  <a class="scroll-down" href="./cars#cars"></a>
+</section>
+<section class="cars" id="cars">
+  <div class="row">
+    <div class="col-lg-3">
+      <div class="row mb-3">
+        <app-brand></app-brand>
+      </div>
+      <div class="row my-3">
+        <app-color></app-color>
+      </div>
+    </div>
+    <div class="col-lg-9">
+      <div class="row">
+        <app-car-card
+          *ngFor="let carDetail of carsWithDetails"
+          [carDetail]="carDetail"
+          [carImageURL]="getCarThumbnailURL(carDetail.carId)"
+          class="col-md-4 mb-4"
+        ></app-car-card>
+      </div>
+    </div>
+  </div>
+</section>

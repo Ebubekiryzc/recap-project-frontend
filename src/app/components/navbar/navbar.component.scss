@@ -1,0 +1,212 @@
+@import "../../sass/colors";
+@import "../../sass/measures";
+@import "../../sass/mixins";
+@import "../../sass/base";
+
+header#navigation-bar {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  right: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: $bg-light;
+  padding: 15px 100px;
+
+  .logo img {
+    width: 60px;
+  }
+
+  #menu-icon {
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 11;
+    display: none;
+  }
+
+  .navbar-items {
+    display: flex;
+    a {
+      text-decoration: none;
+      font-size: $full-size;
+      padding: 10px 20px;
+      color: $text-color;
+      font-weight: 500;
+      user-select: none;
+      &::after {
+        content: "";
+        width: 0;
+        height: 3px;
+        background: $gradient;
+        position: absolute;
+        bottom: -4px;
+        left: 0;
+        transition: 0.5s;
+      }
+      &:hover::after {
+        width: $full-percent;
+      }
+    }
+    li {
+      position: relative;
+    }
+  }
+
+  .header-btn {
+    .sign-in {
+      @include button-colors($bg-light, $dark-color);
+      @extend %btn;
+    }
+
+    .sign-up {
+      @include button-colors($button-bg-primary, $bg-light, $main-color);
+      @extend %btn;
+    }
+
+    .nav-right {
+      min-width: 300px;
+      & > ul {
+        display: flex;
+        align-items: center;
+      }
+
+      ul {
+        li.nav-right-li {
+          margin-left: 25px;
+          cursor: pointer;
+          position: relative;
+          @include hover-color($bg-light, $second-color);
+
+          .profile-info {
+            @extend %btn;
+            @include hover-color($text-color, $main-color);
+            user-select: none;
+          }
+
+          .dd-menu {
+            position: absolute;
+            right: -25px;
+            top: 47px;
+            display: flex;
+            min-width: 300px;
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: $box-shadow-1;
+            display: none;
+
+            li {
+              margin-bottom: 10px;
+            }
+
+            .dd-left {
+              background: $second-color;
+              padding: 15px 0px;
+              border-top-left-radius: 15px;
+              border-bottom-left-radius: 15px;
+              display: block;
+              li {
+                padding-right: 20px;
+                color: #fff;
+              }
+            }
+
+            .dd-right {
+              display: block;
+              padding: 15px 20px;
+
+              li {
+                display: block;
+                margin-right: 60px;
+                @include hover-color($text-color, $second-color);
+              }
+            }
+
+            &::before {
+              content: "";
+              position: absolute;
+              top: -20px;
+              right: 30px;
+              border: 10px solid;
+              border-color: transparent transparent #fff transparent;
+            }
+          }
+
+          &.dd-main.active {
+            .dd-menu {
+              display: flex;
+              flex-direction: row;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 991px) {
+  header#navigation-bar {
+    padding: 18px 40px;
+  }
+}
+
+@media (max-width: 839px) {
+  header#navigation-bar {
+    padding: 11px 40px;
+
+    #menu-icon {
+      display: initial;
+    }
+
+    .navbar-items {
+      position: absolute;
+      top: $full-px * -5;
+      left: 0;
+      right: 0;
+      display: flex;
+      flex-direction: column;
+      background: $bg-light;
+      box-shadow: $box-shadow-1;
+      transition: 0.2s ease;
+      text-align: left;
+      a {
+        padding: $full-size;
+        border-left: 2px solid $main-color;
+        margin: $full-size;
+        display: block;
+
+        &:hover {
+          color: $bg-light;
+          background: $main-color;
+          border: none;
+        }
+
+        &::after {
+          display: none;
+        }
+      }
+      &.active {
+        top: $full-percent;
+      }
+    }
+
+    .sign-up {
+      display: none;
+    }
+  }
+}
+
+@media (max-width: 350px) {
+  header#navigation-bar {
+    padding: 4px 14px;
+    .logo img {
+      width: 30px;
+    }
+    .header-btn .sign-in {
+      padding: 7px 10px;
+      font-size: 14px;
+      font-weight: 400;
+    }
+  }
+}

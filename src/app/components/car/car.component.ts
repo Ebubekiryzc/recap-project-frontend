@@ -24,7 +24,6 @@ export class CarComponent implements OnInit {
   colors: Color[] = [];
 
   carsWithDetails: CarDetail[];
-  carWithDetails: CarDetail;
 
   carsLoaded: boolean = false;
 
@@ -67,13 +66,6 @@ export class CarComponent implements OnInit {
   getAllCarsWithDetails(): void {
     this.carService.getAllWithDetails().subscribe((response) => {
       this.carsWithDetails = response.data;
-      this.isCarsLoaded();
-    });
-  }
-
-  getCarWithDetailsByCarId(id: number): void {
-    this.carService.getCarWithDetailsById(id).subscribe((response) => {
-      this.carWithDetails = response.data;
       this.isCarsLoaded();
     });
   }

@@ -1,0 +1,57 @@
+<header id="navigation-bar">
+  <a href="#home" class="logo"
+    ><img src="../../../assets/images/carRentalLogo.svg" alt="Logo"
+  /></a>
+  <fa-icon
+    [icon]="faBars"
+    id="menu-icon"
+    (click)="menuClassToggler()"
+  ></fa-icon>
+
+  <ul class="navbar-items" #navbar>
+    <li><a href="#home">Home</a></li>
+    <li><a routerLink="/cars">Services</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+  </ul>
+  <div *ngIf="!userDetails" class="header-btn">
+    <a class="sign-in" routerLink="/sign">Sign In</a>
+    <a class="sign-up" routerLink="/sign">Sign Up</a>
+  </div>
+  <div *ngIf="userDetails" class="header-btn">
+    <div class="nav-right">
+      <ul>
+        <li class="nav-right-li dd-main" (click)="toggleProfileInfo()" #ddmain>
+          <a class="profile-info"
+            >{{ userDetails.firstName }} {{ userDetails.lastName }}</a
+          >
+
+          <div class="dd-menu">
+            <div class="dd-left">
+              <ul>
+                <li>
+                  <div class="row"><fa-icon [icon]="faInfo"></fa-icon></div>
+                </li>
+                <li>
+                  <div class="row">
+                    <fa-icon [icon]="faCreditCard"></fa-icon>
+                  </div>
+                </li>
+                <li>
+                  <div class="row"><fa-icon [icon]="faSignOut"></fa-icon></div>
+                </li>
+              </ul>
+            </div>
+            <div class="dd-right">
+              <ul>
+                <li><div class="row">Edit Profile</div></li>
+                <li><div class="row">Credit Cards</div></li>
+                <li><div class="row" (click)="logOut()">Logout</div></li>
+              </ul>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</header>

@@ -1,91 +1,75 @@
-<div class="row">
+<section *ngIf="carInfo && currentImage" class="car-details" id="carDetails">
   <div class="row">
-    <div class="col-md-8">
-      <div id="carousel" class="carousel carousel-dark slide">
-        <div class="carousel-inner">
-          <div
-            *ngFor="let carImage of carImages"
-            [class]="getCurrentImageClass(carImage)"
-          >
-            <img [src]="getCarImageURL(carImage)" alt="..." />
+    <div class="col-md-6">
+      <div
+        class="row mt-5"
+        [ngsRevealSet]="{ reset: true, delay: 200, origin: 'top' }"
+        [ngsSelector]="'#detailImage'"
+      >
+        <div [class]="setDetailImageClass()" id="detailImage" #detailImage>
+          <img
+            [src]="getCurrentCarImageURL()"
+            alt="current-image"
+            class="current-image"
+          />
+        </div>
+      </div>
+      <div
+        class="row"
+        [ngsRevealSet]="{ reset: true, delay: 200, origin: 'left' }"
+        [ngsSelector]="'.carousel-slider'"
+      >
+        <div class="carousel-slider">
+          <app-image-carousel
+            [imageURL]="safeURLs"
+            (currentSelection)="getSelectedImage($event)"
+          ></app-image-carousel>
+        </div>
+      </div>
+    </div>
+    <div
+      class="col-md-6"
+      [ngsRevealSet]="{ reset: true, delay: 200, origin: 'left' }"
+      [ngsSelector]="'.car-info'"
+    >
+      <div class="row car-info pb-5 mx-5 mt-5">
+        <div class="row mt-5">
+          <div class="box">
+            <div class="row">
+              <fa-icon [icon]=""></fa-icon>
+              <h3>
+                {{ carInfo.brandName }}
+                <span>{{ carInfo.carName }}</span>
+              </h3>
+              <div class="price">
+                <span>Price: </span>
+                {{ carInfo.dailyPrice | currency: "TRY":"₺":"1.2" }}
+              </div>
+              <p>
+                <fa-icon [icon]="faCircle"></fa-icon> {{ carInfo.colorName }}
+                <fa-icon [icon]="faCircle"></fa-icon> {{ carInfo.modelYear }}
+              </p>
+            </div>
           </div>
-          <div *ngIf="carImages.length > 1" class="carousel-controls">
-            <a
-              class="carousel-control-prev"
-              role="button"
-              (click)="getPreviousImage()"
-            >
-              <span
-                class="carousel-control-prev-icon"
-                aria-hidden="true"
-              ></span>
-            </a>
-            <a
-              class="carousel-control-next"
-              role="button"
-              (click)="getNextImage()"
-            >
-              <span
-                class="carousel-control-next-icon"
-                aria-hidden="true"
-              ></span>
-            </a>
+        </div>
+        <div
+          class="
+            flex-row
+            mt-5
+            ps-5
+            align-items-center
+            justify-content-center
+            d-flex
+          "
+        >
+          <div class="col-md-6">
+            <div class="row">
+              <a class="btn rent-button">Rent</a>
+            </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="col-md-4">
-      <table *ngIf="carLoaded" class="table table-dark">
-        <tbody>
-          <tr>
-            <th>Car Id</th>
-            <td>{{ carInfo.carId }}</td>
-          </tr>
-          <tr>
-            <th>Brand Name</th>
-            <td>{{ carInfo.brandName }}</td>
-          </tr>
-          <tr>
-            <th>Model Name</th>
-            <td>{{ carInfo.carName }}</td>
-          </tr>
-          <tr>
-            <th>Color</th>
-            <td>{{ carInfo.colorName }}</td>
-          </tr>
-          <tr>
-            <th>Daily Price</th>
-            <td>{{ carInfo.dailyPrice }}</td>
-          </tr>
-          <tr>
-            <th>Model Year</th>
-            <td>{{ carInfo.modelYear }}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
   </div>
-  <div class="row mt-2 p-2">
-    <div class="col">
-      <input
-        class="form-control"
-        [min]="getDatetimeNow()"
-        type="datetime-local"
-        name="rentDate"
-        id="rentDate"
-      />
-    </div>
-    <div class="col">
-      <input
-        class="form-control"
-        [min]="getDatetimeNow()"
-        type="datetime-local"
-        name="returnDate"
-        id="returnDate"
-      />
-    </div>
-  </div>
-  <div class="flex-row mt-1 p-2 d-flex justify-content-center">
-    <button routerLink="/payment" class="btn btn-outline-success px-5" (click)="addToCart()">Rent</button>
-  </div>
-</div>
+  <div class="row"></div>
+</section>

@@ -1,0 +1,227 @@
+<!-- Home -->
+<section class="home" id="home">
+  <div class="car-image">
+    <img src="../../../../assets/images/mainPageCar.png" alt="logo-car" />
+  </div>
+  <div
+    [ngsRevealSet]="{ reset: true, delay: 200, origin: 'top' }"
+    [ngsSelector]="'.text'"
+    class="text"
+  >
+    <h1><span>Looking </span>to <br />rent a car</h1>
+    <p>
+      Find the most suitable one for you among <br />
+      hundreds of offers with various campaigns for long-term rentals.
+    </p>
+    <div class="app-stores">
+      <img src="../../../../assets/images/android.png" alt="google-play-logo" />
+      <img src="../../../../assets/images/ios.png" alt="ios-logo" />
+    </div>
+  </div>
+  <div
+    class="form-container"
+    [ngsRevealSet]="{ reset: true, delay: 200, origin: 'left' }"
+    [ngsSelector]="'.form-container form'"
+  >
+    <form>
+      <div class="input-box">
+        <span>Pick-Up Date</span>
+        <input
+          type="datetime-local"
+          name="rentDate"
+          id="rentDate"
+          [value]="getCurrentDay()"
+        />
+      </div>
+      <div class="input-box">
+        <span>Return Date</span>
+        <input
+          type="datetime-local"
+          name="returnDate"
+          id="returnDate"
+          [value]="addDayToCurrentDay()"
+        />
+      </div>
+      <input
+        type="submit"
+        name="submitButton"
+        id="submitButton"
+        value="Search"
+        class="btn"
+      />
+    </form>
+  </div>
+</section>
+<!-- Easy Steps -->
+<section class="ride" id="ride">
+  <div
+    class="heading"
+    [ngsRevealSet]="{ reset: true, delay: 100, origin: 'top' }"
+    [ngsSelector]="'.heading'"
+  >
+    <span>How Its Works</span>
+    <h1>Rent With 3 Easy Steps</h1>
+  </div>
+  <div
+    class="ride-container"
+    [ngsRevealSet]="{ reset: true, delay: 200, origin: 'top' }"
+    [ngsSelector]="'.ride-container .box'"
+  >
+    <div class="box">
+      <fa-icon [icon]="faSignInAlt"></fa-icon>
+      <h2>Login your account</h2>
+      <p>
+        If you do not have an account, quickly create an account and benefit
+        from our campaigns safely.
+      </p>
+    </div>
+    <div class="box">
+      <fa-icon [icon]="faCalendarCheck" class="calendar-check"></fa-icon>
+      <h2>Pick-Up Date</h2>
+      <p>
+        Determine the day intervals according to your needs among the available
+        dates and make your reservation.
+      </p>
+    </div>
+    <div class="box">
+      <fa-icon [icon]="faCalendarPlus"></fa-icon>
+      <h2>Book A Car</h2>
+      <p>
+        Get the vehicle you choose on the day of delivery and start using it.
+      </p>
+    </div>
+  </div>
+</section>
+<!-- Services -->
+<section class="services" id="services">
+  <div class="heading">
+    <span>Best Services</span>
+    <h1>Check Out Our <br />Featured Listings</h1>
+  </div>
+  <div
+    class="services-container"
+    [ngsRevealSet]="{ reset: true, delay: 200, origin: 'top' }"
+    [ngsSelector]="'.services-container'"
+  >
+    <app-car-card
+      *ngFor="let carDetail of carsWithDetails"
+      [carDetail]="carDetail"
+      [carImageURL]="getCarThumbnailURL(carDetail.carId)"
+    ></app-car-card>
+  </div>
+</section>
+<!-- About -->
+<section class="about" id="about">
+  <div class="heading">
+    <span>About Us</span>
+    <h1>Best Customer Experience</h1>
+  </div>
+  <div
+    class="about-container"
+    [ngsRevealSet]="{ reset: true, delay: 200, origin: 'top' }"
+    [ngsSelector]="'.about-container'"
+  >
+    <div class="about-img">
+      <img
+        src="../../../../assets/images/mainPageCarReverse.png"
+        alt="about-section-image"
+      />
+    </div>
+    <div class="about-text">
+      <span>About Us</span>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam ea
+        expedita earum amet eaque assumenda similique hic provident quam
+        officiis?
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga obcaecati,
+        rerum veritatis eligendi, facere ea voluptatum velit sed animi ullam
+        porro ad sapiente! A ex ad fugit quasi quaerat debitis dolorem itaque
+        eligendi nihil vel dicta blanditiis neque cum ullam hic molestiae
+        numquam deserunt amet cumque fugiat, sit cupiditate corrupti?
+      </p>
+    </div>
+  </div>
+</section>
+<!-- Reviews -->
+<section class="reviews" id="reviews">
+  <div class="heading">
+    <span>About Us</span>
+    <h1>Whats Our Customer Say</h1>
+  </div>
+  <div
+    class="reviews-container"
+    [ngsRevealSet]="{ reset: true, delay: 200, origin: 'top' }"
+    [ngsSelector]="'.reviews-container .box'"
+  >
+    <div class="box">
+      <div class="rev-img">
+        <img src="../../../../assets/images/customerOne.jpg" alt="Teresa" />
+      </div>
+      <h2>Teresa</h2>
+      <div class="stars">
+        <fa-icon [icon]="faStar"></fa-icon>
+        <fa-icon [icon]="faStar"></fa-icon>
+        <fa-icon [icon]="faStar"></fa-icon>
+        <fa-icon [icon]="faStar"></fa-icon>
+        <fa-icon [icon]="faStarHalf"></fa-icon>
+      </div>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem odit ea
+        labore quasi, nobis perferendis, libero voluptatum neque praesentium
+        tempore dolorum nisi. Beatae, excepturi hic.
+      </p>
+    </div>
+
+    <div class="box">
+      <div class="rev-img">
+        <img src="../../../../assets/images/customerTwo.jpg" alt="Whersia" />
+      </div>
+      <h2>Whersia</h2>
+      <div class="stars">
+        <fa-icon [icon]="faStar"></fa-icon>
+        <fa-icon [icon]="faStar"></fa-icon>
+        <fa-icon [icon]="faStar"></fa-icon>
+        <fa-icon [icon]="faStar"></fa-icon>
+        <fa-icon [icon]="faStar"></fa-icon>
+      </div>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint voluptate
+        ullam provident, nihil sit nulla deserunt nemo quae officiis ducimus
+        repudiandae cumque tenetur ad optio laboriosam! Rerum expedita ipsum
+        modi.
+      </p>
+    </div>
+
+    <div class="box">
+      <div class="rev-img">
+        <img src="../../../../assets/images/customerThree.jpg" alt="Viciante" />
+      </div>
+      <h2>Viciante</h2>
+      <div class="stars">
+        <fa-icon [icon]="faStar"></fa-icon>
+        <fa-icon [icon]="faStar"></fa-icon>
+        <fa-icon [icon]="faStar"></fa-icon>
+        <fa-icon [icon]="faStarHalf"></fa-icon>
+      </div>
+      <p>
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur ut
+        commodi doloremque, atque vel sapiente esse soluta? Corporis ducimus
+        voluptatibus autem fuga nesciunt blanditiis laborum?
+      </p>
+    </div>
+  </div>
+</section>
+<!-- Register Now -->
+<section
+  class="register-now"
+  id="register-now"
+  [ngsRevealSet]="{ reset: true, delay: 200, origin: 'bottom' }"
+  [ngsSelector]="'.register-now'"
+>
+  <h2>Create Your Account Now For Free</h2>
+  <div class="box">
+    <a routerLink="sign" class="btn">REGISTER</a>
+  </div>
+</section>

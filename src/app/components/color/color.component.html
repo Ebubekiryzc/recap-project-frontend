@@ -1,30 +1,42 @@
-<div class="bg-dark bg-gradient text-center text-light p-3 mb-1 rounded">
-  <strong>{{ allColors }}</strong>
+<div class="colors">
+  <div class="row">
+    <div class="group">
+      <strong>{{ allColors }}</strong>
+    </div>
+  </div>
+  <div class="row">
+    <div class="mb-1">
+      <input
+        type="text"
+        [(ngModel)]="filterColorText"
+        class="form-control"
+        id="filterColorText"
+        placeholder="Enter your brand name"
+      />
+    </div>
+  </div>
+  <ul>
+    <div class="row">
+      <li
+        *ngIf="!filterColorText"
+        [class]="getAllColorClass()"
+        (click)="setCurrentColor()"
+        routerLink="/cars"
+      >
+        <p>
+          {{ allColors }}
+        </p>
+      </li>
+      <li
+        *ngFor="let color of colors | filterBrand: filterColorText"
+        [class]="getCurrentColorClass(color)"
+        (click)="setCurrentColor(color)"
+        routerLink="/cars/color/{{ color.id }}"
+      >
+        <p>
+          {{ color.name }}
+        </p>
+      </li>
+    </div>
+  </ul>
 </div>
-<div class="mb-1">
-  <input
-    type="text"
-    [(ngModel)]="filterColorText"
-    class="form-control"
-    id="filterColorText"
-    placeholder="Enter your color name"
-  />
-</div>
-<ul class="list-group">
-  <li
-    *ngIf="!filterColorText"
-    [class]="getAllColorClass()"
-    (click)="setCurrentColor()"
-    routerLink="/cars"
-  >
-    {{ allColors }}
-  </li>
-  <li
-    *ngFor="let color of colors | filterColor: filterColorText"
-    [class]="getCurrentColorClass(color)"
-    (click)="setCurrentColor(color)"
-    routerLink="/cars/color/{{ color.id }}"
-  >
-    {{ color.name }}
-  </li>
-</ul>

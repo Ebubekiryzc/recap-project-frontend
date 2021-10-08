@@ -1,0 +1,37 @@
+@import "../../sass/colors";
+@import "../../sass/measures";
+
+.image-slider {
+  user-select: none;
+  .box {
+    text-align: center;
+    border: $border-1;
+    width: $full-percent;
+    height: auto;
+    transform: scale(0.9);
+    .slide-image {
+      width: $full-percent;
+      height: $full-percent;
+      object-fit: cover;
+      object-position: center;
+      opacity: 0.5;
+    }
+  }
+
+  .swiper-slide-active {
+    border: $border-3;
+    transform: scale(1);
+    .slide-image {
+      opacity: 1;
+    }
+  }
+
+  .swiper-pagination-bullet-active {
+    background: $second-color;
+  }
+
+  .swiper-button-prev,
+  .swiper-button-next {
+    color: $button-bg-primary;
+  }
+}
